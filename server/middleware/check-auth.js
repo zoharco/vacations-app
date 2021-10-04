@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const HttpError = require("../models/http-error");
 
-module.exports = (req, res, next) => {
+const checkAuth = (req, res, next) => {
     if(req.method === 'OPTIONS') {
         return next();
     }
@@ -19,3 +19,8 @@ module.exports = (req, res, next) => {
         return next(error);
     }
 };
+
+
+module.exports = {
+    checkAuth
+}
