@@ -1,0 +1,61 @@
+.vacationPage {
+    width:80%;
+    margin: 0 auto;
+}
+.vacationPage table td{
+    vertical-align: top;
+    text-align: left;
+}
+.vacationPage table td:nth-child(1){
+    width: 30%;
+}
+.vacationPage table td:nth-child(2){
+    width:70%;
+}
+
+  
+  .vacationPage__buttons {
+    display: flex;
+    margin-top:100px;
+  }
+
+  
+  .vacationPage__buttons a ,
+  .vacationPage__buttons .followButton
+  {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 20px;
+    
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #292929;
+    background: #61dafb;
+  }
+  .vacationPage__buttons .followButton,
+  .vacationPage__buttons .deleteButton {
+      cursor: pointer;
+      border: 1px solid #61dafb;
+      border-radius: 5px;
+     
+  }
+  .vacationPage__buttons a:hover,
+  .vacationPage__buttons a:active {
+    background: #78e2ff;
+    border-color: #78e2ff;
+  }
+
+
+  .vacationPage__buttons .deleteButton{
+    width: 100%;
+    background: red; 
+    border-color: red;
+    margin-right: 1rem;
+
+    } 
+
+    .vacationPage__buttons .deleteButton:hover {
+        background: rgb(248, 62, 62); 
+        border-color: rgb(248, 62, 62);
+    }

@@ -1,0 +1,15 @@
+.editVacation-container h1{
+    color: white;
+    text-align: center;
+  }
+  
+  .editVacation-container {
+    width: 60%;
+    max-width: 25rem;
+    margin: 7rem auto;
+    text-align: center;
+  }
+  
+  .editVacationForm {
+    margin-bottom: 1rem;
+  }

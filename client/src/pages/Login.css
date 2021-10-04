@@ -1,0 +1,15 @@
+.authentication h1{
+    color: white;
+    text-align: center;
+  }
+  
+  .loginContainer {
+    width: 60%;
+    max-width: 25rem;
+    margin: 7rem auto;
+    text-align: center;
+  }
+  
+  .loginForm {
+    margin-bottom: 1rem;
+  }

@@ -1,0 +1,14 @@
+.addVacation-container h1{
+    text-align: center;
+  }
+  
+ .addVacation-container{
+    width: 60%;
+    max-width: 25rem;
+    margin: 7rem auto;
+    text-align: center;
+  }
+  
+  .addVacationForm {
+    margin-bottom: 1rem;
+  }

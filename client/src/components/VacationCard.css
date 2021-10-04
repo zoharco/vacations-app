@@ -1,0 +1,64 @@
+.vacation {
+    margin: 0.5rem;
+    width: calc(30% - (2rem + 20px));
+    min-width: 17.5rem;
+    border: 1px solid #20232a;
+    color: #fff;
+    background: #20232a;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+  .vacation > *{
+      width:100%;
+  }
+  .vacation .showDetailsWrapper {
+    margin-top:auto;
+    display: flex;
+    width:100;
+    justify-content: end;
+    align-self: end;
+  }
+  .vacation a ,
+  .vacation .followButton{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 20px;
+    
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #292929;
+    background: #61dafb;
+  }
+  .vacation .followButton{
+      cursor: pointer;
+      border: 1px solid #61dafb;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+  }
+  .vacation a:hover,
+  .vacation a:active {
+    background: #78e2ff;
+    border-color: #78e2ff;
+  }
+  
+  .vacation__description {
+    padding: 0;
+  }
+  
+  .vacation__image {
+    height: 4rem;
+    margin-right: 1rem auto;
+  }
+  
+  .vacation__title {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: normal;
+    color: #61dafb;
+  }
+  
+  
