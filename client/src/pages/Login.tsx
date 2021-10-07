@@ -42,7 +42,7 @@ const Login = () => {
                 },
             );
             
-            auth.login(responseData.userId, responseData.token);
+            auth.login(responseData.userId, responseData.token, null, responseData.userRole);
         } catch(err: any) {
         }
     };

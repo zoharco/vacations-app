@@ -10,7 +10,7 @@ import { useHttpClient } from '../shared/hooks/http-hook';
 import { AuthContext } from '../shared/context/auth-context';
 import { useHistory } from 'react-router-dom';
 
-const AddVacation = () => {
+const AddVacation: React.FC = () => {
     const auth = useContext(AuthContext);
     const history = useHistory();
     const { isLoading, error, sendRequest, clearError} = useHttpClient();
@@ -50,6 +50,7 @@ const AddVacation = () => {
                 'http://localhost:5000/api/vacations/', 
                 'POST', 
                 JSON.stringify({
+                    userId: auth.userId,
                     title: formState.inputs.title.value,
                     price: formState.inputs.price.value,
                     countInStock: formState.inputs.countInStock.value,
@@ -61,8 +62,9 @@ const AddVacation = () => {
                     Authorization: 'Bearer ' + auth.token
                 }
             );
+            
             history.push('/');
-        } catch(err) {
+        } catch(err: any) {
 
         }
     };

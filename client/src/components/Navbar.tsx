@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import './Navbar.css';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../shared/context/auth-context';
-
+import { ROLE } from '../shared/util/role';
 
 const Navbar = () => {
     const auth = useContext(AuthContext);
@@ -15,13 +15,13 @@ const Navbar = () => {
                 </li>
             }
             {
-                auth.isLoggedIn && 
+                auth.isLoggedIn && (auth.userRole === ROLE.basic) &&
                 <li>
                     <NavLink to={`/my-vacations`}>My Vacations</NavLink>
                 </li>
             }
-            {
-                auth.isLoggedIn && 
+            { 
+                auth.isLoggedIn && (auth.userRole === ROLE.admin) &&
                 <li>
                     <NavLink to="/add-vacation">Add Vacation</NavLink>
                 </li>

@@ -8,6 +8,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import './Vacation.css';
 import { VacationI } from '../components/VacationCard';
 import { AuthContext } from '../shared/context/auth-context';
+import { ROLE } from '../shared/util/role';
 
 const Vacation: React.FC = () => {
     const auth = useContext(AuthContext);
@@ -161,9 +162,18 @@ const Vacation: React.FC = () => {
                             }
                             <tr className="vacationPage__buttonsWrapper">
                                 <td className="vacationPage__buttons" colSpan={2}>
-                                    { <a className="deleteButton" onClick={showDeleteWarningHandler}>Delete</a> }
-                                    <Button to={`/vacations/${vacationId}/edit`}>Edit</Button>
-                                    { <a className="followButton" onClick={onFollowClickHandler}>{getButtonText()}</a> }    
+                                    { 
+                                        auth.userRole == ROLE.admin &&
+                                        <a className="deleteButton" onClick={showDeleteWarningHandler}>Delete</a> 
+                                    }
+                                    {
+                                        auth.userRole == ROLE.admin &&
+                                        <Button to={`/vacations/${vacationId}/edit`}>Edit</Button>
+                                    }
+                                    { 
+                                        auth.userRole == ROLE.basic &&
+                                        <a className="followButton" onClick={onFollowClickHandler}>{getButtonText()}</a> 
+                                    }    
                                 </td>
                             </tr>
                         </tbody>

@@ -1,4 +1,4 @@
-export const followedClickHandler = async ( userId: string, vacationId: string) => {
+export const followedClickHandler = async ( userId: string, vacationId: string, token: string) => {
     try{
         const response = await fetch(`http://localhost:5000/api/users/${userId}/follow`, {
             method:"POST",
@@ -7,7 +7,8 @@ export const followedClickHandler = async ( userId: string, vacationId: string) 
                 vacationId: vacationId
             }),
             headers:  {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token
             }
         });
   
@@ -20,7 +21,7 @@ export const followedClickHandler = async ( userId: string, vacationId: string) 
     return true;
 };
 
-export const unFollowedClickHandler = async (userId: string, vacationId: string) => {
+export const unFollowedClickHandler = async (userId: string, vacationId: string, token: string) => {
     try{
         const response = await fetch(`http://localhost:5000/api/users/${userId}/unfollow`, {
             method:"DELETE",
@@ -29,7 +30,8 @@ export const unFollowedClickHandler = async (userId: string, vacationId: string)
                 vacationId: vacationId
             }),
             headers:  {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token
             }
         });
 

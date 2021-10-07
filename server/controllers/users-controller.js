@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const HttpError = require('../models/http-error');
 const Vacation = require('../models/vacation');
 const User = require('../models/user');
+const ROLE = require("../models/role");
 
 const DUMMY_USERS = [
     {
@@ -75,7 +76,8 @@ const signup = async (req, res, next) => {
         username,
         email,
         password: hashedPassword,
-        vacations: []
+        vacations: [],
+        role: ROLE.BASIC
     });
 
     try {
@@ -142,7 +144,7 @@ const login = async (req, res, next) => {
         return next(error);
     }
 
-    res.json({ userId: existingUser.id, email: existingUser.email, token: token });
+    res.json({ userId: existingUser.id, email: existingUser.email, token: token, userRole: existingUser.role });
 };
 
 

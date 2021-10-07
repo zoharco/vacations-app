@@ -3,8 +3,8 @@ const { check } = require('express-validator');
 
 const vacationsController = require('../controllers/vacations-controller');
 const router = express.Router();
-const checkAuth = require('../middleware/check-auth');
-
+const { checkAuth, authoRole } = require('../middleware/check-auth');
+const ROLE = require("../models/role")
 router.get('/', vacationsController.getAllVacations);
 
 router.get('/:vid', vacationsController.getVacationById);
@@ -12,9 +12,9 @@ router.get('/:vid', vacationsController.getVacationById);
 // router.get('/user/:uid', vacationsController.getVacationsByUserId);
 
 router.use(checkAuth);
-
 router.post(
     '/', 
+    authoRole(ROLE.ADMIN),
     [
         check('title').not().isEmpty(), 
         check('description').isLength({ min: 30 }), 

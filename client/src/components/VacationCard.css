@@ -44,7 +44,9 @@
     background: #78e2ff;
     border-color: #78e2ff;
   }
-  
+  .vacation .button:last-child{
+    margin-right: 0;
+  }
   .vacation__description {
     padding: 0;
   }

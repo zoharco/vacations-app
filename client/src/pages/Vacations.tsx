@@ -36,9 +36,9 @@ const Vacations: React.FC = () => {
         const vacationIsFollowed = vacationsUpdated[vacationIndex].isFollowed;
         let succeeded: boolean = false;
         if(vacationIsFollowed){
-            succeeded = await unFollowedClickHandler(auth.userId, vacationId);
+            succeeded = await unFollowedClickHandler(auth.userId, vacationId, auth.token);
         } else{
-            succeeded = await followedClickHandler(auth.userId, vacationId);
+            succeeded = await followedClickHandler(auth.userId, vacationId, auth.token);
         }
         if(succeeded) {
             vacationsUpdated[vacationIndex].isFollowed = !vacationIsFollowed;

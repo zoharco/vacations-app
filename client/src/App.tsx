@@ -8,23 +8,26 @@ import Login from "./pages/Login";
 import Vacations from "./pages/Vacations";
 import MyVacations from "./pages/MyVacations";
 import AddVacation from './pages/AddVacation';
+import EditVacation from "./pages/EditVacation";
+import Vacation from "./pages/Vacation";
 // Components
 import Header from "./components/Header";
 
 import { AuthContext } from "./shared/context/auth-context";
-import EditVacation from "./pages/EditVacation";
-import Vacation from "./pages/Vacation";
+import { ROLE } from './shared/util/role';
 
 let logoutTimer: ReturnType<typeof setTimeout>;
 
 function App() {
   const [token, setToken] = useState<any>(null);
   const [userIdState, setUserIdState] = useState<any>();
+  const [userRoleState, setUserRoleState] = useState<any>();
   const [tokenExpirationDate, setTokenExpirationDate] = useState<any>();
   
-  const login = useCallback((uid, token, expirationDate) => {
+  const login = useCallback((uid, token, expirationDate, userRole) => {
 	setToken(token);
     setUserIdState(uid);
+    setUserRoleState(userRole);
     const tokenExpirationDateCalc = expirationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
     setTokenExpirationDate(tokenExpirationDateCalc);
     localStorage.setItem(
@@ -64,23 +67,34 @@ function App() {
         storeData.token && 
         new Date(storeData.expiration) > new Date()
         ){
-        login(storeData.userId, storeData.token, new Date(storeData.expiration));
+        login(storeData.userId, storeData.token, new Date(storeData.expiration), storeData.userRole);
     }
   }, [login]);
 
   let routes;
-
+  
   if(token  && userIdState) {
 	  routes = (
 		<Switch>
 		  <Route exact path="/vacations/" component={Vacations} />
-		  <Route exact path="/vacations/:vacationId/edit" component={EditVacation} />
 		  <Route exact path="/vacations/:vacationId" component={Vacation} />
 		  <Route exact path="/my-vacations" component={MyVacations} />
-		  <Route exact path="/add-vacation" component={AddVacation} />
 		  <Redirect to="/vacations" />
 		</Switch>
 	  );
+      if(userRoleState === ROLE.admin){
+        routes = (
+		<Switch>
+            <Route exact path="/vacations/" component={Vacations} />
+            <Route exact path="/vacations/:vacationId" component={Vacation} />
+            <Route exact path="/my-vacations" component={MyVacations} />
+            <Route exact path="/vacations/:vacationId/edit" component={EditVacation} />
+            <Route exact path="/add-vacation" component={AddVacation} />
+    		<Redirect to="/vacations" />
+		</Switch>
+
+        );
+      }
   } else {
 	  routes = (
 		<Switch>
@@ -98,6 +112,7 @@ function App() {
           isLoggedIn: !!token, 
           token: token,
           userId: userIdState,
+          userRole: userRoleState,
           login: login, 
           logout: logout 
         }}

@@ -14,7 +14,27 @@ const MyVacations: React.FC = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try{ 
-                const responseData = await sendRequest(`http://localhost:5000/api/users/${auth.userId}/my-vacations`);
+
+                /*
+                succeeded = await sendRequest(
+                `http://localhost:5000/api/vacations/${vacationId}`, 
+                'DELETE', 
+                null,
+                {
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + auth.token
+                }
+                );
+                 */
+                const responseData = await sendRequest(
+                    `http://localhost:5000/api/users/${auth.userId}/my-vacations`, 
+                    'GET',
+                    null,
+                    {
+                        'Content-Type': 'application/json',
+                        Authorization: 'Bearer ' + auth.token
+                    }
+                );
                 const followedVacation = responseData.vacations.map((vacation: VacationI) => {
                     return {
                         ...vacation,
@@ -33,7 +53,7 @@ const MyVacations: React.FC = () => {
         const vacationIndex = vacationsUpdated.findIndex(v => v.id === vacationId);
         let succeeded: boolean = false;
         try{
-            succeeded = await unFollowedClickHandler(auth.userId, vacationId);
+            succeeded = await unFollowedClickHandler(auth.userId, vacationId, auth.token);
         } catch (err) {}
         if(succeeded){
             vacationsUpdated[vacationIndex].isFollowed = !vacationsUpdated[vacationIndex].isFollowed;

@@ -48,7 +48,7 @@ const Register = () => {
                 }),
                 {'Content-Type': 'application/json'}
             );
-            auth.login(responseData.userData, responseData.token);
+            // auth.login(responseData.userData, responseData.token);
             history.push('/login');
         } catch(err) {
 

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Button from './FormElements/Button';
 import './VacationCard.css';
 import { AuthContext } from '../shared/context/auth-context';
+import { ROLE } from '../shared/util/role';
 
 export interface VacationI {
     id: string,
@@ -37,8 +38,15 @@ const VacationCard: React.FC<VacationCardProps> = ({ vacation, userVacations, on
             <img  className="vacation__image" src={vacation.imageUrl} alt={vacation.title} />
             <div className="showDetailsWrapper">
                 <Button to={`/vacations/${vacation.id}`}>More Details</Button>
-                <Button to={`/vacations/${vacation.id}/edit`}>Edit</Button>
-                { <a className="followButton" onClick={() => onFollowClick(vacation.id)}>{getButtonText()}</a> }
+                {   
+                    auth.userRole === ROLE.admin &&
+                    <Button to={`/vacations/${vacation.id}/edit`}>Edit</Button>
+                }
+                
+                { 
+                    auth.userRole === ROLE.basic &&
+                    <a className="followButton" onClick={() => onFollowClick(vacation.id)}>{getButtonText()}</a> 
+                }
                 
             </div>
         </div>
